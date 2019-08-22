@@ -37,7 +37,7 @@ Test the installation and configuration of the path variables by using cmd.exe a
 
 1. press the windows key to search
 2. type in cmd.exe
-3. click on "cmd.exe"
+3. click on "cmd.exe" / "Command Prompt"
 4. you should now see a window with a black background and a prompt where you can enter commands
 5. type in the following commands
   * `magick`
@@ -48,3 +48,6 @@ Test the installation and configuration of the path variables by using cmd.exe a
   * go back and check the system environment variables -- specifically "Path"
 
 See the animated gif below for expected output.
+
+![test commands magick and tesseract through cmd.exe](testing.gif)
+
