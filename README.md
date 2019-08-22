@@ -1,6 +1,11 @@
 # Using Tesseract on Windows
 
-This document outlines steps for converting pdf files into txt files on Windows 10.
+This document outlines steps for converting pdf files into txt files on Windows 10. OCR with tesseract and pdfs is a two step process:
+
+1. convert pdfs into images (.tiff or jpg, for example)
+2. convert images into plain text (.txt files)
+
+Consequently, the appropriate tools and their dependencies will need to be installed for these conversions. These tools are not graphical; instead they must be run through the commandline. Typically, this can be done through the cmd.exe (also called the "Command Prompt").
 
 ## Required Software
 
@@ -51,3 +56,38 @@ See the animated gif below for expected output.
 
 ![test commands magick and tesseract through cmd.exe](testing.gif)
 
+## Converting pdfs to txt
+
+There are three steps required for converting pdfs to txt:
+
+By writing commands in the Command Prompt...
+
+1. go to the directory containing the pdfs
+2. convert all of the pdfs into images
+3. convert all of the images into pdfs
+
+### Changing Directories
+
+Use the command, `cd` to go to the directory containing the pdfs.
+
+~~~
+cd "c:\Users\yourusername\Desktop\pdfs"
+~~~
+
+Note that the text between the quotes is the path to your pdfs. In windows, if you'd like to get to your desktop, use  `"c:\Users\yourusername\Desktop"`, replacing `yourusername` appropriately.
+
+### Converting to Images
+
+Once you're in the right directory use `magick` to convert pdfs into images. You can play with the the options (channge format to tiff or reduce the quality) if the conversions are taking too long. It may be useful to use this on a subset of pdfs first... just to see it work. The images will be placed in the same directory that the command is run in.
+
+~~~
+magick mogrify -format jpg -alpha off -density 150 -quality 80 -unsharp 1.5 *.pdf
+~~~
+
+### Converting to txt
+
+Finally, go through the images and convert each to txt using the command, `tesseract`:
+
+~~~
+for %i in (*.jpg) do tesseract %i %i.txt
+~~~
